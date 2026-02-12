@@ -6,10 +6,9 @@ app = Flask(__name__)
 @app.route('/api/hello')
 def hello_world():
     """Returns Hello, EDP!"""
-    import os
-    HOSTNAME = os.environ.get('HOSTNAME', 'unknown')
-    print(HOSTNAME)
-    return 'Response received from pod: $HOSTNAME'
+    with open("etc/hostname" ,"r") as f:
+        hostname=f.read().strip()
+    return f"Response received from pod: {hostname}"
 
 
 if __name__ == '__main__':
